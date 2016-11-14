@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+    <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+
+
+    <link rel="stylesheet"href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="app.js" ></script>
+    <script src="shutterstock-oauth.js"></script>
+    <title></title>
+</head>
+
+<body>
+
+<iron-pages id="ironPages" selected="0">
+    <div id="login">
+        <div class="background">
+            <h1>Downloader</h1>
+            <paper-button id="loginBtn">Login</paper-button>
+        </div>
+    </div>
+    <div id="lightboxSelect">
+        <div class="background">
+            <h2 id="inputUserText"></h2>
+            <div>
+                <paper-dropdown-menu label="Lightbox" id="lightboxMenu">
+                    <paper-listbox class="dropdown-content"id="listbox">
+
+                    </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-button id="selectBtn">Select</paper-button>
+            </div>
+            <div>
+                <paper-button id="allLight">All Lightboxes</paper-button>
+            </div>
+        </div>
+    </div>
+    <div id="downlOpt">
+        <div class="background">
+            <h3>Select the Quality and the Download Directory</h3>
+            <paper-dropdown-menu label="Download-Quality"></paper-dropdown-menu>
+            <hr>
+            <paper-button>...(File Directory)</paper-button>
+            <br>
+            <paper-button id="goBtn" >Go</paper-button>
+            <paper-button id="backBtn">Back</paper-button>
+        </div>
+    </div>
+    <div id="progress">
+        <div class="background">
+            <h4>Download Progress</h4>
+            <div id="myProgress">
+                <div id="container"></div>
+            </div>
+            <div id="placeHolder">
+            <paper-button id="backToLoginBtn">Sign Out</paper-button>
+            <paper-button id="differentFolder">Different Lightbox</paper-button>
+            </div>
+        </div>
+    </div>
+</iron-pages>
+</body>
+</html>

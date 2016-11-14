@@ -1,0 +1,84 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'paper-listbox' ]
+2 info using npm@3.10.8
+3 info using node@v7.0.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData paper-listbox
+8 silly fetchNamedPackageData paper-listbox
+9 silly mapToRegistry name paper-listbox
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'paper-listbox',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'paper-listbox',
+12 silly mapToRegistry   name: 'paper-listbox',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.org/paper-listbox
+14 verbose request uri https://registry.npmjs.org/paper-listbox
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 22:13:59
+17 verbose request id a4eb84e1d940b53a
+18 http request GET https://registry.npmjs.org/paper-listbox
+19 http 200 https://registry.npmjs.org/paper-listbox
+20 verbose headers { server: 'nginx/1.10.1',
+20 verbose headers   'content-type': 'application/json',
+20 verbose headers   'last-modified': 'Sat, 30 Jan 2016 03:50:29 GMT',
+20 verbose headers   etag: 'W/"56ac3305-194"',
+20 verbose headers   'content-encoding': 'gzip',
+20 verbose headers   'cache-control': 'max-age=300',
+20 verbose headers   'content-length': '242',
+20 verbose headers   'accept-ranges': 'bytes',
+20 verbose headers   date: 'Sun, 13 Nov 2016 21:13:59 GMT',
+20 verbose headers   via: '1.1 varnish',
+20 verbose headers   age: '0',
+20 verbose headers   connection: 'keep-alive',
+20 verbose headers   'x-served-by': 'cache-lhr6344-LHR',
+20 verbose headers   'x-cache': 'MISS',
+20 verbose headers   'x-cache-hits': '0',
+20 verbose headers   'x-timer': 'S1479071639.574981,VS0,VE40',
+20 verbose headers   vary: 'Accept-Encoding' }
+21 silly get cb [ 200,
+21 silly get   { server: 'nginx/1.10.1',
+21 silly get     'content-type': 'application/json',
+21 silly get     'last-modified': 'Sat, 30 Jan 2016 03:50:29 GMT',
+21 silly get     etag: 'W/"56ac3305-194"',
+21 silly get     'content-encoding': 'gzip',
+21 silly get     'cache-control': 'max-age=300',
+21 silly get     'content-length': '242',
+21 silly get     'accept-ranges': 'bytes',
+21 silly get     date: 'Sun, 13 Nov 2016 21:13:59 GMT',
+21 silly get     via: '1.1 varnish',
+21 silly get     age: '0',
+21 silly get     connection: 'keep-alive',
+21 silly get     'x-served-by': 'cache-lhr6344-LHR',
+21 silly get     'x-cache': 'MISS',
+21 silly get     'x-cache-hits': '0',
+21 silly get     'x-timer': 'S1479071639.574981,VS0,VE40',
+21 silly get     vary: 'Accept-Encoding' } ]
+22 verbose get saving paper-listbox to /Users/antonimuller/.npm/registry.npmjs.org/paper-listbox/.cache.json
+23 verbose correctMkdir /Users/antonimuller/.npm correctMkdir not in flight; initializing
+24 verbose stack TypeError: Cannot convert undefined or null to object
+24 verbose stack     at Function.keys (<anonymous>)
+24 verbose stack     at pickVersionFromRegistryDocument (/usr/local/lib/node_modules/npm/lib/fetch-package-metadata.js:125:29)
+24 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/iferr/index.js:13:50
+24 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/pulse-till-done.js:20:8
+24 verbose stack     at saved (/usr/local/lib/node_modules/npm/lib/cache/caching-client.js:174:7)
+24 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/polyfills.js:233:18
+24 verbose stack     at FSReqWrap.oncomplete (fs.js:111:15)
+25 verbose cwd /Users/antonimuller/Desktop/Shutterstock/RenderProcess/bower_components
+26 error Darwin 14.5.0
+27 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "paper-listbox"
+28 error node v7.0.0
+29 error npm  v3.10.8
+30 error Cannot convert undefined or null to object
+31 error If you need help, you may report this error at:
+31 error     <https://github.com/npm/npm/issues>
+32 verbose exit [ 1, true ]

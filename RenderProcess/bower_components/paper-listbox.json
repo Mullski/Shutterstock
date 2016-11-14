@@ -1,0 +1,6 @@
+{
+  "name": "polymer-project",
+  "dependencies": {
+    "paper-listbox": "polymerelements/paper-listbox#^1.0.0"
+  }
+}
