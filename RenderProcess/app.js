@@ -8,6 +8,10 @@ const {ipcRenderer} = require('electron')
 
 window.addEventListener('load',()=>{
 
+    var LightBoxMap= new Map();
+
+
+    var fetchedLightboxes;
     ipcRenderer.on("shutterservice",(sender,arg)=>{
         console.log("IPC Message");
         console.log(arg);
@@ -18,21 +22,27 @@ window.addEventListener('load',()=>{
                 console.log("Fetched some Boxes Coach, ");
 
                 var listbox = document.querySelector("#listbox");
-
+                fetchedLightboxes=arg.res.data;
                 arg.res.data.forEach((e,i,a)=>{
                     //Namen der Lightboxes holen und in den Dropdown Content
+                    var lightboxItemDiv=document.createElement("div");
+                    lightboxItemDiv.setAttribute("class","itemDiv");
+                    var lightboxItemCheck=document.createElement("paper-checkbox");
                     var lightboxItem=document.createElement("paper-item");
+                    lightboxItemDiv.appendChild(lightboxItemCheck);
+                    lightboxItemDiv.appendChild(lightboxItem);
                     lightboxItem.innerText=e.name;
 
-                    Polymer.dom(listbox).appendChild(lightboxItem);
-                    
+                    LightBoxMap.set(e,lightboxItem);
+
+                    Polymer.dom(listbox).appendChild(lightboxItemDiv);
                     console.log(e.name);
                 });
-
 
                 break;
         }
     });
+
 
 
     var loginBtn=document.getElementById("loginBtn");
@@ -48,6 +58,26 @@ window.addEventListener('load',()=>{
           });
 
     });
+
+    document.querySelector("#listbox").addEventListener("iron-select",()=>{
+
+        console.log("selected item changed");
+        var selLightBox=document.querySelector("#listbox").selectedItem;
+
+        var selectedLightbox;
+        LightBoxMap.forEach((value,key,map)=>{
+            if(value==selLightBox){
+                selectedLightbox = key.;
+                console.log("WE GOTZ SOMETHIN");
+                console.table(selectedLightbox);
+
+            }
+        });
+
+
+    });
+
+
 
     var selectBtn=document.getElementById("selectBtn");
 
