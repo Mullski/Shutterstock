@@ -3,14 +3,10 @@ body
 {
     background-color:grey;
     margin: auto;
-
 }
 
-
-
-
-
-.background{
+.background
+{
 
 }
 
@@ -31,7 +27,7 @@ paper-progress
     height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: hiddenl;
 }
 #downlOpt
 {
@@ -139,6 +135,10 @@ paper-button[toggles][active] {
     height: 50vh;
 }
 .itemDiv{
+    display: flex;
+    align-items: center;
+}
+#contentInfo{
     display: flex;
     align-items: center;
 }
