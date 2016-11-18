@@ -32,11 +32,14 @@ exports.downloadImg=(url,lightboxName,callback)=>{
     var res=url.split("/");
     var name=res[5];
     console.log(name);
-    
-    var file = fs.createWriteStream(homedir+"/downloads/"+lightboxName+"/"+name);
-    var request = https.get(url, function(response) {
-        response.pipe(file);
+    fs.mkdir(homedir+"/downloads/"+lightboxName,(err,folder)=>{
+        var file = fs.createWriteStream(homedir+"/downloads/"+lightboxName+"/"+name);
+        var request = https.get(url, function(response) {
+            response.pipe(file);
+        });
+
     });
+
 
 
 };
@@ -53,7 +56,7 @@ exports.fetchBoxes = (callback) => {
         }
     });
 };
-exports.fetchImageDetThumb = (imageId, callback) => {
+exports.fetchThumb = (imageId, callback) => {
     var uri="https://api.shutterstock.com/v2/images/"+imageId+"?view=full";
 
     request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {

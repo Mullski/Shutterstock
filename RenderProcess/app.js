@@ -8,8 +8,8 @@ const {ipcRenderer} = require('electron')
 const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
 window.addEventListener('load',()=>{
 
-    var LightBoxMap= new Map();
-    var SelectedItems=new Map();
+
+    var SelectedItems;
     var fetchedLightboxes;
 
     var pages = document.querySelector('iron-pages');
@@ -30,7 +30,7 @@ window.addEventListener('load',()=>{
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
    listView.addEventListener("selectionDone",(evnt)=>{
-        var selectedBoxes = evnt.detail;
+        SelectedItems = evnt.detail;
         console.log("Selection Fertig");
         pages.selectNext();
 
@@ -78,9 +78,8 @@ window.addEventListener('load',()=>{
 
 
         var itemId;
-        SelectedItems.forEach((selected,lightbox)=>
+        SelectedItems.forEach((lightbox)=>
         {
-            if(selected){
                 var lightboxIds =lightbox.id;
                 var lightboxName=lightbox.name;
                 ShutterServiceAPI.fetchCollItems(lightboxIds,(err,data)=>{
@@ -129,8 +128,6 @@ window.addEventListener('load',()=>{
 
                     }
                 });
-
-            }
         });
 
 
@@ -150,18 +147,7 @@ window.addEventListener('load',()=>{
     var backBtn=document.getElementById("backBtn");
 
     backBtn.addEventListener('click', function(e) {
-        var pages = document.querySelector('iron-pages');
         pages.selectPrevious();
-        //Make all Selected -> False
-        SelectedItems.forEach((value,key,map)=>{map.set(key,false)});
-        document.querySelectorAll("paper-checkbox").forEach((box)=>{box.checked=false});
-        var list=document.querySelector("#selLightbox");
-        while (list.hasChildNodes()) {
-            list.removeChild(list.lastChild);
-        }
-
-
-
     });
 
 
