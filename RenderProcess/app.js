@@ -30,11 +30,7 @@ window.addEventListener('load',()=>{
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
    listView.addEventListener("selectionDone",(evnt)=>{
-<<<<<<< HEAD
-        var selectedBoxes = evnt.detail;
-=======
         SelectedItems = evnt.detail;
->>>>>>> refs/remotes/origin/master
         console.log("Selection Fertig");
         pages.selectNext();
 
