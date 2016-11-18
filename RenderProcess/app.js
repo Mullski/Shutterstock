@@ -13,42 +13,14 @@ window.addEventListener('load',()=>{
     var fetchedLightboxes;
 
     var pages = document.querySelector('iron-pages');
-
+    var listView = document.querySelector("rush-listview");
     //Fetch the Login Page and Continue when Logged in. 
     document.querySelector("rush-login").addEventListener("authDone",()=>{
         console.log("Auth is Done, welcome");
 
         console.log("We're logged in");
-                pages.selectNext();
-                ShutterServiceAPI.fetchBoxes((err,data)=>{
-                    if(err==null){
-                        var listbox = document.querySelector("#listbox");
-                        fetchedLightboxes=data.data;
-                        data.data.forEach((e,i,a)=>{
-                            //Namen der Lightboxes holen und in den Dropdown Content
-                            var lightboxItemDiv=document.createElement("div");
-                            lightboxItemDiv.setAttribute("class","itemDiv");
-                            var lightboxItemCheck=document.createElement("paper-checkbox");
-                            var lightboxItem=document.createElement("paper-item");
-                            lightboxItemDiv.appendChild(lightboxItemCheck);
-
-                            lightboxItemDiv.appendChild(lightboxItem);
-                            lightboxItem.innerText=e.name;
-
-                            LightBoxMap.set(e,lightboxItemDiv);
-                            SelectedItems.set(e,false);
-
-                            Polymer.dom(listbox).appendChild(lightboxItemDiv);
-                            console.log(e.name);
-
-                            lightboxItemCheck.addEventListener("click",function(){
-                                SelectedItems.set(e,!SelectedItems.get(e))
-                            }.bind(this));
-
-                        });
-                        }
-
-                });
+        pages.selectNext();
+        listView.load();        
 
     });
 
