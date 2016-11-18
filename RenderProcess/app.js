@@ -74,7 +74,7 @@ window.addEventListener('load',()=>{
                 countText.innerHTML=selectedLightbox+" Bilder in der Lightbox";
 
                 //ThumbNail
-                ShutterServiceAPI.fetchThumb(selectedCover,(err,data)=>{
+                ShutterServiceAPI.fetchImageDet(selectedCover,(err,data)=>{
                     if(err==null){
                       var fetchedImage=data.assets.large_thumb.url;
                       //var fetchedImageUri=fetchedImage.preview.url;
@@ -131,6 +131,40 @@ window.addEventListener('load',()=>{
 
         //über jedes item in der Lightbox itterieren und daten sammeln
 
+        SelectedItems.forEach((selected,lightbox)=>
+        {
+            if(selected){
+                var lightboxIds =lightbox.id;
+                ShutterServiceAPI.fetchCollItems(lightboxIds,(err,data)=>{
+                    if(err==null)
+                    {
+                        for(var i=0;i<data.data.length;i++)
+                        {
+                            //jedes Item
+                            var itemId=data.data[i].id;
+                            ShutterServiceAPI.fetchImageDet(itemId,(err,data)=> {
+                                if (err == null)
+                                {
+                                    var details=data.assets;
+                                    console.log(data.description);
+
+                                    //vektor eps checken ob es vektorgrafiken gibt
+                                    applyRules(details);
+
+                                }
+                            });
+
+                        }
+
+                    }
+                    else
+                    {
+
+                    }
+                });
+
+            }
+        });
 
         ShutterServiceAPI.fetchUserSubs((err,data)=>{
            if(err==null)
@@ -146,7 +180,7 @@ window.addEventListener('load',()=>{
                 if(err==null)
                 {
                     var dlink=data.data[0].url;
-                    console.log("Hellau! "+dlink);
+                    console.log("Download Link"+dlink);
                 }
                 else{
                     console.log("Error DLink");
@@ -245,6 +279,24 @@ function findLightboxCount(name,LightBoxMap,callback){
         }
         })
     }
+function applyRules(details)
+{
+
+    console.log(Object.keys(details));
+
+    for(var i=0;i<Object.keys(details).length;i++)
+    {
+        if(Object.keys(details)[i]=="vector_eps")
+        {
+            console.log("VektorGrafik");
+        }
+        else
+        {
+
+        }
+    }
+
+}
 
 
 

@@ -36,7 +36,7 @@ exports.fetchBoxes = (callback) => {
         }
     });
 };
-exports.fetchThumb = (imageId, callback) => {
+exports.fetchImageDet = (imageId, callback) => {
   var uri="https://api.shutterstock.com/v2/images/"+imageId+"?view=full";
 
     request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
@@ -62,6 +62,25 @@ exports.fetchUserSubs = (callback) => {
         else if (err) {
             callback(err,null);
             console.log("Fetch User Sub error:" +err);
+        }
+    });
+};
+
+exports.fetchCollItems =(collectionId,callback) => {
+    var uri="https://api.shutterstock.com/v2/images/collections/"+collectionId+"/items";
+
+    request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
+        if (!err && response.statusCode == 200)
+        {
+            console.log("LightboxItems "+body);
+            callback(null,JSON.parse(body));
+        }
+        else if (err) {
+            callback(err,null);
+            console.log("Fetch LightboxItems error:" +err);
+        }
+        else{
+            console.log("anderer Fehler"+err);
         }
     });
 };
