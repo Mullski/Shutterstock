@@ -12,14 +12,13 @@ window.addEventListener('load',()=>{
     var SelectedItems=new Map();
     var fetchedLightboxes;
 
-    var loginBtn=document.getElementById("loginBtn");
+    var pages = document.querySelector('iron-pages');
 
-    loginBtn.addEventListener('click', function(e) {
-        var pages = document.querySelector('iron-pages');
+    //Fetch the Login Page and Continue when Logged in. 
+    document.querySelector("rush-login").addEventListener("authDone",()=>{
+        console.log("Auth is Done, welcome");
 
-        ShutterServiceAPI.openAuth(function(err,data){
-            if(err == null){
-                console.log("We're logged in");
+        console.log("We're logged in");
                 pages.selectNext();
                 ShutterServiceAPI.fetchBoxes((err,data)=>{
                     if(err==null){
@@ -50,10 +49,10 @@ window.addEventListener('load',()=>{
                         }
 
                 });
-            }
-        });
 
     });
+
+
 
     document.querySelector("#listbox").addEventListener("iron-select",()=>{
 
