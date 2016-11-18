@@ -14,6 +14,12 @@ window.addEventListener('load',()=>{
 
     var loginBtn=document.getElementById("loginBtn");
 
+    //Fetch the Login Page and Continue when Logged in. 
+    document.querySelector("rush-login").addEventListener("authDone",()=>{
+        console.log("Auth is Done, welcome");    
+    });
+
+
     loginBtn.addEventListener('click', function(e) {
         var pages = document.querySelector('iron-pages');
 
