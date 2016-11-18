@@ -1,16 +1,15 @@
 
 body
 {
-    background-image: url("svg-low-poly-background-css-js-snippet.jpg");
-
-    width: 800px;
+    background-color:grey;
     margin: auto;
+}
+
+.background
+{
 
 }
-.background{
-    width:100%;
-    height:120%;
-}
+
 paper-progress
 {
     --paper-progress-active-color: #e91e63;
@@ -24,9 +23,11 @@ paper-progress
 }
 #lightboxSelect
 {
-    width:50%;
-    align-content: left;
-    margin:0 auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hiddenl;
 }
 #downlOpt
 {
@@ -112,4 +113,40 @@ paper-button[toggles][active] {
 #placeHolder{
     margin-top:60px;
     margin-left:50px;
+}
+#listbox{
+    height: 100vh;
+    overflow: scroll;
+    width: 30vw;
+    min-width: 200px;
+}
+#contentScroll{
+    display: flex;
+    flex-direction: row;
+}
+#contentSelect{
+    width: 70vw;
+    height: 100vh;
+    background: black;
+}
+#contentInfo{
+    width: 100vw;
+    background-color: grey;
+    height: 27vh;
+
+
+}
+.itemDiv{
+    display: flex;
+    align-items: center;
+}
+#contentInfo{
+    display: flex;
+    align-items: center;
+}
+#thumb{
+    margin:2vh;
+}
+#countInfo{
+    margin:8vh;
 }

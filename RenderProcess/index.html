@@ -9,6 +9,7 @@
     <link rel="import" href="bower_components/paper-progress/paper-progress.html">
     <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
     <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
 
 
     <link rel="stylesheet"href="style.css">
@@ -17,9 +18,7 @@
     <script src="shutterstock-oauth.js"></script>
     <title></title>
 </head>
-
 <body>
-
 <iron-pages id="ironPages" selected="0">
     <div id="login">
         <div class="background">
@@ -29,24 +28,24 @@
     </div>
     <div id="lightboxSelect">
         <div class="background">
-            <h2 id="inputUserText"></h2>
-            <div>
-                <paper-dropdown-menu label="Lightbox" id="lightboxMenu">
-                    <paper-listbox class="dropdown-content"id="listbox">
+            <div id="contentScroll">
+                <paper-listbox class="dropdown-content"id="listbox">
+                </paper-listbox>
+                <div id="contentSelect">
+                    <div id="contentInfo">
+                        <img src="" id="thumb">
+                        <p id="countInfo"></p>
+                    </div>
+                    <paper-button id="selectBtn">Continue</paper-button>
+                </div>
+            </div>
 
-                    </paper-listbox>
-                </paper-dropdown-menu>
-                <paper-button id="selectBtn">Select</paper-button>
-            </div>
-            <div>
-                <paper-button id="allLight">All Lightboxes</paper-button>
-            </div>
         </div>
     </div>
     <div id="downlOpt">
         <div class="background">
             <h3>Select the Quality and the Download Directory</h3>
-            <paper-dropdown-menu label="Download-Quality"></paper-dropdown-menu>
+            <ul id="selLightbox"></ul>
             <hr>
             <paper-button>...(File Directory)</paper-button>
             <br>
