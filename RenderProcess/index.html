@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script>
+    /* this script must run before Polymer is imported */
+    window.Polymer = {
+      dom: 'shadow',
+      lazyRegister: true
+    };
+  </script>
     <link rel="import" href="bower_components/paper-button/paper-button.html">
     <link rel="import" href="bower_components/iron-pages/iron-pages.html">
     <link rel="import" href="bower_components/paper-input/paper-input.html">
@@ -9,23 +16,21 @@
     <link rel="import" href="bower_components/paper-progress/paper-progress.html">
     <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
     <link rel="import" href="bower_components/paper-item/paper-item.html">
-    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
-
+    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html"> 
+    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+    <!--  Our Own Custom Elements-->
+    <link rel="import" href="elements/rush-login/rush-login.html">
 
     <link rel="stylesheet"href="style.css">
-    <link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script type="text/javascript" src="app.js" ></script>
     <script src="shutterstock-oauth.js"></script>
     <title></title>
 </head>
 <body>
 <iron-pages id="ironPages" selected="0">
-    <div id="login">
-        <div class="background">
-            <h1>Downloader</h1>
-            <paper-button id="loginBtn">Login</paper-button>
-        </div>
-    </div>
+    <rush-login></rush-login>
     <div id="lightboxSelect">
         <div class="background">
             <div id="contentScroll">
