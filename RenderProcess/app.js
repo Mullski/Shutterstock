@@ -9,54 +9,49 @@ const ShutterServiceAPI = require('electron').remote.require('./ShutterService.j
 window.addEventListener('load',()=>{
 
     var LightBoxMap= new Map();
-
-
+    var SelectedItems=new Map();
     var fetchedLightboxes;
-    ipcRenderer.on("shutterservice",(sender,arg)=>{
-        console.log("IPC Message");
-        console.log(arg);
-
-        switch (arg.task)
-        {
-            case "fetchBoxes":
-                console.log("Fetched some Boxes Coach, ");
-
-                var listbox = document.querySelector("#listbox");
-                fetchedLightboxes=arg.res.data;
-                arg.res.data.forEach((e,i,a)=>{
-                    //Namen der Lightboxes holen und in den Dropdown Content
-                    var lightboxItemDiv=document.createElement("div");
-                    lightboxItemDiv.setAttribute("class","itemDiv");
-                    var lightboxItemCheck=document.createElement("paper-checkbox");
-                    var lightboxItem=document.createElement("paper-item");
-                    lightboxItemDiv.appendChild(lightboxItemCheck);
-
-                    lightboxItemDiv.appendChild(lightboxItem);
-                    lightboxItem.innerText=e.name;
-
-                    LightBoxMap.set(e,lightboxItemDiv);
-
-                    Polymer.dom(listbox).appendChild(lightboxItemDiv);
-                    console.log(e.name);
-                });
-
-                break;
-        }
-    });
-
-
 
     var loginBtn=document.getElementById("loginBtn");
 
     loginBtn.addEventListener('click', function(e) {
         var pages = document.querySelector('iron-pages');
 
-        ipcRenderer.send('shutterservice', {task:"auth"});
+        ShutterServiceAPI.openAuth(function(err,data){
+            if(err == null){
+                console.log("We're logged in");
+                pages.selectNext();
+                ShutterServiceAPI.fetchBoxes((err,data)=>{
+                    if(err==null){
+                        var listbox = document.querySelector("#listbox");
+                        fetchedLightboxes=data.data;
+                        data.data.forEach((e,i,a)=>{
+                            //Namen der Lightboxes holen und in den Dropdown Content
+                            var lightboxItemDiv=document.createElement("div");
+                            lightboxItemDiv.setAttribute("class","itemDiv");
+                            var lightboxItemCheck=document.createElement("paper-checkbox");
+                            var lightboxItem=document.createElement("paper-item");
+                            lightboxItemDiv.appendChild(lightboxItemCheck);
 
-        ipcRenderer.once("shutterservice",function(){
-            pages.selectNext();
-            ipcRenderer.send("shutterservice",{task:"fetchBoxes"});
-          });
+                            lightboxItemDiv.appendChild(lightboxItem);
+                            lightboxItem.innerText=e.name;
+
+                            LightBoxMap.set(e,lightboxItemDiv);
+                            SelectedItems.set(e,false);
+
+                            Polymer.dom(listbox).appendChild(lightboxItemDiv);
+                            console.log(e.name);
+
+                            lightboxItemCheck.addEventListener("click",function(){
+                                SelectedItems.set(e,!SelectedItems.get(e))
+                            }.bind(this));
+
+                        });
+                        }
+
+                });
+            }
+        });
 
     });
 
@@ -71,12 +66,23 @@ window.addEventListener('load',()=>{
             if(value==selLightBox){
                 console.log("Gefunden");
                 selectedLightbox = key.total_item_count;
-                selectedCover=key.cover_item;
-                console.table(selectedCover);
+                selectedCover=key.cover_item.id;
+                console.table("Hier ID "+selectedCover);
                 console.log(selectedLightbox);
                 var countText=document.querySelector("#countInfo");
                 countText.innerHTML="";
                 countText.innerHTML=selectedLightbox+" Bilder in der Lightbox";
+
+                //ThumbNail
+                ShutterServiceAPI.fetchThumb(selectedCover,(err,data)=>{
+                    if(err==null){
+                      var fetchedImage=data.assets.large_thumb.url;
+                      //var fetchedImageUri=fetchedImage.preview.url;
+                      var thumbCont=document.querySelector("#thumb");
+                        thumbCont.setAttribute("src","");
+                        thumbCont.setAttribute("src",fetchedImage);
+                    }
+                });
             }
         });
 
@@ -88,13 +94,75 @@ window.addEventListener('load',()=>{
     var selectBtn=document.getElementById("selectBtn");
 
     selectBtn.addEventListener('click', function(e) {
-        var pages = document.querySelector('iron-pages');
-        pages.selectNext();
+        var cont=false;
+        SelectedItems.forEach((selected,lightbox)=>{
+            if(selected){
+                var list=document.querySelector("#selLightbox");
+                var selItem=document.createElement("li");
+                selItem.innerHTML=lightbox.name+"("+lightbox.total_item_count+" in der Lightbox)";
+                list.appendChild(selItem);
+                console.log(lightbox.name);
+                cont=true;
+            }
+
+        });
+            if(cont==true)
+            {
+                var pages = document.querySelector('iron-pages');
+                pages.selectNext();
+            }
+            else
+            {
+                //dont go forward
+            }
+
+
+
     });
 
     var goBtn=document.getElementById("goBtn");
 
     goBtn.addEventListener('click', function(e) {
+
+        //selected Lightboxes
+        //rules
+        //maximale Qualität(kostenfrei) falls Vektorgrafik dann Vektor
+        //license getter
+
+        //über jedes item in der Lightbox itterieren und daten sammeln
+
+
+        ShutterServiceAPI.fetchUserSubs((err,data)=>{
+           if(err==null)
+           {
+               var subscriptionId=data.data[0].id;
+               console.log("Bruv its here! "+subscriptionId);
+           }
+           else
+           {
+               console.log("Fetch User Sub Error "+err);
+           }
+            ShutterServiceAPI.getDownloadByID((err,data)=>{
+                if(err==null)
+                {
+                    var dlink=data.data[0].url;
+                    console.log("Hellau! "+dlink);
+                }
+                else{
+                    console.log("Error DLink");
+                }
+            });
+
+        });
+
+        //download test img
+        var imageId=259670459;
+        /*for(var i=0;i<SelectedItems.length;i++)
+        {
+
+        }*/
+
+
         var pages = document.querySelector('iron-pages');
         pages.selectNext();
         move();
@@ -105,6 +173,16 @@ window.addEventListener('load',()=>{
     backBtn.addEventListener('click', function(e) {
         var pages = document.querySelector('iron-pages');
         pages.selectPrevious();
+        //Make all Selected -> False
+        SelectedItems.forEach((value,key,map)=>{map.set(key,false)});
+        document.querySelectorAll("paper-checkbox").forEach((box)=>{box.checked=false});
+        var list=document.querySelector("#selLightbox");
+        while (list.hasChildNodes()) {
+            list.removeChild(list.lastChild);
+        }
+
+
+
     });
 
 
@@ -158,6 +236,15 @@ function move(){
 
 
 }
+function findLightboxCount(name,LightBoxMap,callback){
+
+    LightBoxMap.forEach((value,key,map)=>{
+        if(value==name)
+        {
+           callback(key.total_item_count);
+        }
+        })
+    }
 
 
 

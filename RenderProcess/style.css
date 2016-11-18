@@ -132,7 +132,9 @@ paper-button[toggles][active] {
 #contentInfo{
     width: 100vw;
     background-color: grey;
-    height: 50vh;
+    height: 27vh;
+
+
 }
 .itemDiv{
     display: flex;
@@ -141,4 +143,10 @@ paper-button[toggles][active] {
 #contentInfo{
     display: flex;
     align-items: center;
+}
+#thumb{
+    margin:2vh;
+}
+#countInfo{
+    margin:8vh;
 }
