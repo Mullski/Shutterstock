@@ -6,7 +6,9 @@ const {app, BrowserWindow} = require('electron');
 
 let express = require("express");
 var request = require('request');
-
+var https = require('https');
+var fs = require('fs');
+var os = require("os");
 
 var Webapp = express();
 var server = Webapp.listen(8080);
@@ -24,7 +26,23 @@ exports.openAuth = (callback) => {
 
     authCallbacks.push(callback);
 };
+exports.downloadImg=(url,lightboxName,callback)=>{
+    var homedir = os.homedir();
+    console.log("Download Img, homedir /n"+homedir);
+    var res=url.split("/");
+    var name=res[5];
+    console.log(name);
+    fs.mkdir(homedir+"/downloads/"+lightboxName,(err,folder)=>{
+        var file = fs.createWriteStream(homedir+"/downloads/"+lightboxName+"/"+name);
+        var request = https.get(url, function(response) {
+            response.pipe(file);
+        });
 
+    });
+
+
+
+};
 exports.fetchBoxes = (callback) => {
     //Fetches a Boxes, callback<func(err,data)>
     var uri = "https://api.shutterstock.com/v2/images/collections?page=1&per_page=150";
@@ -39,7 +57,21 @@ exports.fetchBoxes = (callback) => {
     });
 };
 exports.fetchThumb = (imageId, callback) => {
-  var uri="https://api.shutterstock.com/v2/images/"+imageId+"?view=full";
+    var uri="https://api.shutterstock.com/v2/images/"+imageId+"?view=full";
+
+    request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
+        if (!err && response.statusCode == 200) {
+            callback(null,JSON.parse(body));
+
+        }
+        else if (err) {
+            callback(err,null);
+        }
+
+    });
+};
+exports.fetchImageDet = (imageIdDown, callback) => {
+    var uri="https://api.shutterstock.com/v2/images/"+imageIdDown+"?view=full";
 
     request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
         if (!err && response.statusCode == 200) {
@@ -57,30 +89,52 @@ exports.fetchUserSubs = (callback) => {
 
     request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
         if (!err && response.statusCode == 200) {
-            console.log("user subs "+body);
+            console.log("fetchUserSubs/user subs "+body);
 
             callback(null,JSON.parse(body));
         }
         else if (err) {
             callback(err,null);
-            console.log("Fetch User Sub error:" +err);
+            console.log("fetchUserSubs/Fetch User Sub error:" +err);
         }
     });
 };
 
-exports.getDownloadByID = (callback) => {
+exports.fetchCollItems =(collectionId,callback) => {
+    var uri="https://api.shutterstock.com/v2/images/collections/"+collectionId+"/items";
+
+    request({ url: uri, headers: { "user-agent": "request", "authorization": "Bearer " + token } }, function (err, response, body) {
+        if (!err && response.statusCode == 200)
+        {
+            console.log("LightboxItems "+body);
+            callback(null,JSON.parse(body));
+        }
+        else if (err) {
+            callback(err,null);
+            console.log("fetchCollItems/Fetch LightboxItems error: " +err);
+        }
+        else{
+            console.log("fetchCollItems/anderer Fehler"+err);
+        }
+    });
+};
+
+exports.getDownloadByID = (itemId,size,subId,format,callback) => {
     //Accuires a License for a Given Picture, returns (url:string,error:error) on callback
+    console.log(typeof callback);
 
-
-    var endpoint = "https://api.shutterstock.com/v2/images/licenses?subscription_id=s27028342";
+    var endpoint = "https://api.shutterstock.com/v2/images/licenses?subscription_id="+subId+"";
     var query = {
         subscription_id:"s27028342"
-    };
+    }
 
     var body= {
         "images": [
             {
-                "image_id": "410445427"
+                "image_id": itemId,
+                "size":size,
+                "format":format
+
             }
         ]
     };
@@ -92,12 +146,12 @@ exports.getDownloadByID = (callback) => {
         if (!err && httpResponse.statusCode == 200) {
 
             callback(null,JSON.parse(body));
-            console.log("Post Request works")
+            console.log("getDownloadById/Post Request works/n"+body);
 
         }
         else{
             callback(err,JSON.parse(body));
-            console.log("Post Request does not work")
+            console.log("getDownloadById/Post Request does not work/n")
         }
     });
 };
