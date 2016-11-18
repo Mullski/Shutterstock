@@ -73,7 +73,7 @@ window.addEventListener('load',()=>{
                 countText.innerHTML=selectedLightbox+" Bilder in der Lightbox";
 
                 //ThumbNail
-                ShutterServiceAPI.fetchImageDet(selectedCover,(err,data)=>{
+                ShutterServiceAPI.fetchImageDetThumb(selectedCover,(err,data)=>{
                     if(err==null){
                       var fetchedImage=data.assets.large_thumb.url;
                       //var fetchedImageUri=fetchedImage.preview.url;
@@ -130,25 +130,75 @@ window.addEventListener('load',()=>{
 
         //über jedes item in der Lightbox itterieren und daten sammeln
 
+        var validSubscriptionId;
+        ShutterServiceAPI.fetchUserSubs((err,data)=>{
+            if(err==null)
+            {
+                for(var i=0;i<data.data.length;i++)
+                {
+                    var subscriptionId=data.data[i].id;
+                    console.log(subscriptionId);
+                    var expirationDate=data.data[i].expiration_time;
+                    var valid=checkIfValid(expirationDate);
+                    if(valid==true)
+                    {
+                        validSubscriptionId=subscriptionId;
+                    }
+                    else
+                    {
+                        validSubscriptionId="";
+                    }
+                    console.log("Valid "+validSubscriptionId);
+                }
+            }
+            else
+            {
+                console.log("Fetch User Sub Error "+err);
+            }
+
+        });
+
+
+        var itemId;
         SelectedItems.forEach((selected,lightbox)=>
         {
             if(selected){
                 var lightboxIds =lightbox.id;
+                var lightboxName=lightbox.name;
                 ShutterServiceAPI.fetchCollItems(lightboxIds,(err,data)=>{
                     if(err==null)
                     {
                         for(var i=0;i<data.data.length;i++)
                         {
                             //jedes Item
-                            var itemId=data.data[i].id;
+
+                            itemId=data.data[i].id;
+                            console.log("Item ids "+itemId);
                             ShutterServiceAPI.fetchImageDet(itemId,(err,data)=> {
                                 if (err == null)
                                 {
                                     var details=data.assets;
-                                    console.log(data.description);
-
+                                    var imgId=data.id;
+                                    console.log("image ids "+imgId);
                                     //vektor eps checken ob es vektorgrafiken gibt
-                                    applyRules(details);
+                                    var info=applyRules(details);
+
+
+                                    ShutterServiceAPI.getDownloadByID(imgId,info.size,validSubscriptionId,info.format,(err,data)=>{
+                                        if(err==null)
+                                        {
+                                            var dlink=data.data[0].download.url;
+                                            console.log(dlink);
+                                            //downloaden
+                                            ShutterServiceAPI.downloadImg(dlink,lightboxName,(err,data)=>{
+
+                                            });
+
+                                        }
+                                        else{
+                                            console.log("Error DLink");
+                                        }
+                                    });
 
                                 }
                             });
@@ -165,31 +215,9 @@ window.addEventListener('load',()=>{
             }
         });
 
-        ShutterServiceAPI.fetchUserSubs((err,data)=>{
-           if(err==null)
-           {
-               var subscriptionId=data.data[0].id;
-               console.log("Bruv its here! "+subscriptionId);
-           }
-           else
-           {
-               console.log("Fetch User Sub Error "+err);
-           }
-            ShutterServiceAPI.getDownloadByID((err,data)=>{
-                if(err==null)
-                {
-                    var dlink=data.data[0].url;
-                    console.log("Download Link"+dlink);
-                }
-                else{
-                    console.log("Error DLink");
-                }
-            });
 
-        });
 
         //download test img
-        var imageId=259670459;
         /*for(var i=0;i<SelectedItems.length;i++)
         {
 
@@ -278,24 +306,66 @@ function findLightboxCount(name,LightBoxMap,callback){
         }
         })
     }
-function applyRules(details)
+function checkIfValid(expirationDate)
 {
-
-    console.log(Object.keys(details));
-
-    for(var i=0;i<Object.keys(details).length;i++)
+    var localDate=new Date();
+    var timeStempLocal=Math.round(new Date(localDate).getTime()/1000);
+    var timeStemp=Math.round(new Date(expirationDate).getTime()/1000);
+    var valid=false;
+    if(timeStempLocal<timeStemp)
     {
-        if(Object.keys(details)[i]=="vector_eps")
-        {
-            console.log("VektorGrafik");
-        }
-        else
-        {
-
-        }
+        return valid=true;
+    }
+    else
+    {
+        return valid=false;
     }
 
 }
+function applyRules(details)
+{
+    console.log(details);
+    console.log(Object.keys(details));
+    var keys = Object.keys(details);
+    var size="";
+    var format="";
+    if(keys.some((e)=>{return e === "vector_eps"}))
+    {
+        size="vector";
+        format="eps";
+    }
+    /*else if(keys.some((e)=>{return e === "supersize_jpg"}))
+    {
+        size="supersize";
+        format="jpg";
+    }*/
+    else if(keys.some((e)=>{return e === "huge_jpg"}))
+    {
+        size="huge";
+        format="jpg";
+    }
+    else if(keys.some((e)=>{return e === "medium_jpg"}))
+    {
+        size="medium";
+        format="jpg";
+    }
+    else if(keys.some((e)=>{return e === "small_jpg"}))
+    {
+        size="small";
+        format="jpg";
+    }
+    else
+    {
+        console.log("error size");
+    }
+
+
+        return {size:size,format:format};
+
+
+
+}
+
 
 
 
