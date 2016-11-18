@@ -52,7 +52,7 @@ Polymer({
                     }else{
                         //Use no Picture otherwise.
                         console.log("No Images");
-                        box.cover_item.url="";
+                        
                     }
                     
                 });
@@ -63,9 +63,16 @@ Polymer({
     },
     continue:function(){
         //Continue to the Next Screeen -> Fetch all Selected Boxes and Pass them 
-        var boxes =this.get("lightboxes");
-        selectedBoxes = boxes.filter((e)=>{return e.selected});
-        this.fire("selectionDone",selectedBoxes)
+        var count = this.get("selectedImages");
+        if(count>0){
+            var boxes =this.get("lightboxes");
+            selectedBoxes = boxes.filter((e)=>{return e.selected});
+            this.fire("selectionDone",selectedBoxes)
+        }else{
+            this.$.toast.text="Bitte wählen sie Bilder aus";
+            this.$.toast.open();
+        }
+        
     },
     logout:function(){
         // Call the Logout and Request to go Back. 
