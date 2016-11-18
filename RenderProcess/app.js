@@ -14,110 +14,28 @@ window.addEventListener('load',()=>{
 
     var pages = document.querySelector('iron-pages');
 
+    var listView = document.querySelector("rush-listview");
+
     //Fetch the Login Page and Continue when Logged in. 
     document.querySelector("rush-login").addEventListener("authDone",()=>{
         console.log("Auth is Done, welcome");
 
         console.log("We're logged in");
-                pages.selectNext();
-                ShutterServiceAPI.fetchBoxes((err,data)=>{
-                    if(err==null){
-                        var listbox = document.querySelector("#listbox");
-                        fetchedLightboxes=data.data;
-                        data.data.forEach((e,i,a)=>{
-                            //Namen der Lightboxes holen und in den Dropdown Content
-                            var lightboxItemDiv=document.createElement("div");
-                            lightboxItemDiv.setAttribute("class","itemDiv");
-                            var lightboxItemCheck=document.createElement("paper-checkbox");
-                            var lightboxItem=document.createElement("paper-item");
-                            lightboxItemDiv.appendChild(lightboxItemCheck);
 
-                            lightboxItemDiv.appendChild(lightboxItem);
-                            lightboxItem.innerText=e.name;
-
-                            LightBoxMap.set(e,lightboxItemDiv);
-                            SelectedItems.set(e,false);
-
-                            Polymer.dom(listbox).appendChild(lightboxItemDiv);
-                            console.log(e.name);
-
-                            lightboxItemCheck.addEventListener("click",function(){
-                                SelectedItems.set(e,!SelectedItems.get(e))
-                            }.bind(this));
-
-                        });
-                        }
-
-                });
-
-    });
-
-
-
-    document.querySelector("#listbox").addEventListener("iron-select",()=>{
-
-        console.log("selected item changed");
-        var selLightBox=document.querySelector("#listbox").selectedItem;
-
-        var selectedLightbox;
-        var selectedCover;
-        LightBoxMap.forEach((value,key,map)=>{
-            if(value==selLightBox){
-                console.log("Gefunden");
-                selectedLightbox = key.total_item_count;
-                selectedCover=key.cover_item.id;
-                console.table("Hier ID "+selectedCover);
-                console.log(selectedLightbox);
-                var countText=document.querySelector("#countInfo");
-                countText.innerHTML="";
-                countText.innerHTML=selectedLightbox+" Bilder in der Lightbox";
-
-                //ThumbNail
-                ShutterServiceAPI.fetchImageDetThumb(selectedCover,(err,data)=>{
-                    if(err==null){
-                      var fetchedImage=data.assets.large_thumb.url;
-                      //var fetchedImageUri=fetchedImage.preview.url;
-                      var thumbCont=document.querySelector("#thumb");
-                        thumbCont.setAttribute("src","");
-                        thumbCont.setAttribute("src",fetchedImage);
-                    }
-                });
-            }
-        });
+        pages.selectNext();
+        listView.load();        
 
 
     });
+    listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
+   listView.addEventListener("selectionDone",(evnt)=>{
+        var selectedBoxes = evnt.detail;
+        console.log("Selection Fertig");
+        pages.selectNext();
 
+});
 
-    var selectBtn=document.getElementById("selectBtn");
-
-    selectBtn.addEventListener('click', function(e) {
-        var cont=false;
-        SelectedItems.forEach((selected,lightbox)=>{
-            if(selected){
-                var list=document.querySelector("#selLightbox");
-                var selItem=document.createElement("li");
-                selItem.innerHTML=lightbox.name+"("+lightbox.total_item_count+" in der Lightbox)";
-                list.appendChild(selItem);
-                console.log(lightbox.name);
-                cont=true;
-            }
-
-        });
-            if(cont==true)
-            {
-                var pages = document.querySelector('iron-pages');
-                pages.selectNext();
-            }
-            else
-            {
-                //dont go forward
-            }
-
-
-
-    });
 
     var goBtn=document.getElementById("goBtn");
 
