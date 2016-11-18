@@ -8,8 +8,8 @@ const {ipcRenderer} = require('electron')
 const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
 window.addEventListener('load',()=>{
 
-    var LightBoxMap= new Map();
-    var SelectedItems=new Map();
+
+    var SelectedItems;
     var fetchedLightboxes;
 
     var pages = document.querySelector('iron-pages');
@@ -30,7 +30,11 @@ window.addEventListener('load',()=>{
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
    listView.addEventListener("selectionDone",(evnt)=>{
+<<<<<<< HEAD
         var selectedBoxes = evnt.detail;
+=======
+        SelectedItems = evnt.detail;
+>>>>>>> refs/remotes/origin/master
         console.log("Selection Fertig");
         pages.selectNext();
 
@@ -48,32 +52,91 @@ window.addEventListener('load',()=>{
 
         //über jedes item in der Lightbox itterieren und daten sammeln
 
-
+        var validSubscriptionId;
         ShutterServiceAPI.fetchUserSubs((err,data)=>{
-           if(err==null)
-           {
-               var subscriptionId=data.data[0].id;
-               console.log("Bruv its here! "+subscriptionId);
-           }
-           else
-           {
-               console.log("Fetch User Sub Error "+err);
-           }
-            ShutterServiceAPI.getDownloadByID((err,data)=>{
-                if(err==null)
+            if(err==null)
+            {
+                for(var i=0;i<data.data.length;i++)
                 {
-                    var dlink=data.data[0].url;
-                    console.log("Hellau! "+dlink);
+                    var subscriptionId=data.data[i].id;
+                    console.log(subscriptionId);
+                    var expirationDate=data.data[i].expiration_time;
+                    var valid=checkIfValid(expirationDate);
+                    if(valid==true)
+                    {
+                        validSubscriptionId=subscriptionId;
+                    }
+                    else
+                    {
+                        validSubscriptionId="";
+                    }
+                    console.log("Valid "+validSubscriptionId);
                 }
-                else{
-                    console.log("Error DLink");
-                }
-            });
+            }
+            else
+            {
+                console.log("Fetch User Sub Error "+err);
+            }
 
         });
 
+
+        var itemId;
+        SelectedItems.forEach((lightbox)=>
+        {
+                var lightboxIds =lightbox.id;
+                var lightboxName=lightbox.name;
+                ShutterServiceAPI.fetchCollItems(lightboxIds,(err,data)=>{
+                    if(err==null)
+                    {
+                        for(var i=0;i<data.data.length;i++)
+                        {
+                            //jedes Item
+
+                            itemId=data.data[i].id;
+                            console.log("Item ids "+itemId);
+                            ShutterServiceAPI.fetchImageDet(itemId,(err,data)=> {
+                                if (err == null)
+                                {
+                                    var details=data.assets;
+                                    var imgId=data.id;
+                                    console.log("image ids "+imgId);
+                                    //vektor eps checken ob es vektorgrafiken gibt
+                                    var info=applyRules(details);
+
+
+                                    ShutterServiceAPI.getDownloadByID(imgId,info.size,validSubscriptionId,info.format,(err,data)=>{
+                                        if(err==null)
+                                        {
+                                            var dlink=data.data[0].download.url;
+                                            console.log(dlink);
+                                            //downloaden
+                                            ShutterServiceAPI.downloadImg(dlink,lightboxName,(err,data)=>{
+
+                                            });
+
+                                        }
+                                        else{
+                                            console.log("Error DLink");
+                                        }
+                                    });
+
+                                }
+                            });
+
+                        }
+
+                    }
+                    else
+                    {
+
+                    }
+                });
+        });
+
+
+
         //download test img
-        var imageId=259670459;
         /*for(var i=0;i<SelectedItems.length;i++)
         {
 
@@ -88,18 +151,7 @@ window.addEventListener('load',()=>{
     var backBtn=document.getElementById("backBtn");
 
     backBtn.addEventListener('click', function(e) {
-        var pages = document.querySelector('iron-pages');
         pages.selectPrevious();
-        //Make all Selected -> False
-        SelectedItems.forEach((value,key,map)=>{map.set(key,false)});
-        document.querySelectorAll("paper-checkbox").forEach((box)=>{box.checked=false});
-        var list=document.querySelector("#selLightbox");
-        while (list.hasChildNodes()) {
-            list.removeChild(list.lastChild);
-        }
-
-
-
     });
 
 
@@ -162,6 +214,66 @@ function findLightboxCount(name,LightBoxMap,callback){
         }
         })
     }
+function checkIfValid(expirationDate)
+{
+    var localDate=new Date();
+    var timeStempLocal=Math.round(new Date(localDate).getTime()/1000);
+    var timeStemp=Math.round(new Date(expirationDate).getTime()/1000);
+    var valid=false;
+    if(timeStempLocal<timeStemp)
+    {
+        return valid=true;
+    }
+    else
+    {
+        return valid=false;
+    }
+
+}
+function applyRules(details)
+{
+    console.log(details);
+    console.log(Object.keys(details));
+    var keys = Object.keys(details);
+    var size="";
+    var format="";
+    if(keys.some((e)=>{return e === "vector_eps"}))
+    {
+        size="vector";
+        format="eps";
+    }
+    /*else if(keys.some((e)=>{return e === "supersize_jpg"}))
+    {
+        size="supersize";
+        format="jpg";
+    }*/
+    else if(keys.some((e)=>{return e === "huge_jpg"}))
+    {
+        size="huge";
+        format="jpg";
+    }
+    else if(keys.some((e)=>{return e === "medium_jpg"}))
+    {
+        size="medium";
+        format="jpg";
+    }
+    else if(keys.some((e)=>{return e === "small_jpg"}))
+    {
+        size="small";
+        format="jpg";
+    }
+    else
+    {
+        console.log("error size");
+    }
+
+
+        return {size:size,format:format};
+
+
+
+}
+
 
 
 
