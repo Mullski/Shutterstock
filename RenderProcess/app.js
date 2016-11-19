@@ -25,7 +25,6 @@ window.addEventListener('load',()=>{
         pages.selectNext();
         listView.load();        
 
-
     });
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
@@ -77,7 +76,7 @@ window.addEventListener('load',()=>{
         });
 
 
-        var itemId;
+        var itemId="";
         SelectedItems.forEach((lightbox)=>
         {
                 var lightboxIds =lightbox.id;
