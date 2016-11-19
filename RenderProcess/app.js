@@ -35,9 +35,15 @@ window.addEventListener('load',()=>{
         SelectedItems = evnt.detail;
         console.log("Selection Fertig");
         pages.selectNext();
-
         overView.setList(SelectedItems);
     });
+
+    overView.addEventListener("back",()=>{pages.selectPrevious()})
+    overView.addEventListener("continue",(e)=>{
+        var args = e.detail;
+        pages.selectNext();
+    })
+    
 
 
     var goBtn=document.getElementById("goBtn");
