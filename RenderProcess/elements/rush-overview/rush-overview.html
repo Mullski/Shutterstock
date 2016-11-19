@@ -7,28 +7,37 @@
                     <div class="wrapper">
                         <div class="listItem front">
                             <div class="col">
-                                <label class="desc">{{item.name}}</label>
+                                <p class="desc">{{item.name}}</p>
 
                             </div>
                         </div>
                         <div>
                 </template>
             </paper-listbox>
-            <div id="settings">
-                <div class="">
-                    <p><b>{{selectedImages}}</b> Bilder ausgewählt</p>
-                    <p>{{availableImages}} Bilder mit der Aktuellsten Subscription verfügbar</p>
-                </div>
+            <div id="settings" class="col">
                 <div class="row">
-                    <label>Speicherort auswählen</label>
-                    <input type="file" webkitdirectory />
+                    <div class="col center half">
+                        <h2>{{selectedImages}}</h2>
+                        <label>Bilder ausgewählt</label>
+                    </div>
+                    <div class="col half">
+                        <div class="row">
+                            <p><b>{{subscription.allotment.downloads_left}}</b> Bilder mit der Aktuellsten Subscription verfügbar</p>
+                        </div>
+                        <div class="row">
+                            <label>{{timeout}} läuft die Subscription aus.</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row spaced full">
+                    <paper-input id="inputForValidation" required label="Speicherort Auswählen" on-tap="openDialog"></paper-input>
+                    <paper-button raised on-tap="openDialog">Öffnen</paper-button>
                 </div>
             </div>
             <div id="footer">
                 <paper-button on-tap="back">Zurück</paper-button>
-                <div id="info">
-                    <p id="sum">{{selectedImages}} Bilder ausgewählt</p>
-                </div>
+                
                 <paper-button on-tap="continue" elevated>Download</paper-button>
             </div>
             </div>
@@ -73,6 +82,23 @@
                     font-size: 1.3em;
                 }
                 
+                #settings > div {
+                    margin-top: 25px;
+                }
+                
+                #settings paper-button {
+                    color: white;
+                    font-size: 0.7em;
+                }
+                
+                #settings paper-input {
+                        width: 60%;
+                    --paper-input-container-color: white;
+                    --paper-input-container-focus-color: white;
+                    --paper-input-container-invalid-color: white;
+                    --paper-input-container-input-color: white;
+                }
+                
                 ::-webkit-scrollbar {
                     width: 6px;
                 }
@@ -98,9 +124,28 @@
                     align-items: flex-start;
                 }
                 
+                .row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                }
+                
+                .center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .spaced{
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: flex-end;
+                }
+                
                 .desc {
                     font-size: 1.5em;
                     margin: 5px 0px;
+                    padding-left: 20px;
                 }
                 
                 .listItem {
@@ -143,6 +188,20 @@
                 img {
                     height: auto;
                     width: 100%;
+                }
+                
+                .half {
+                    width: 50%;
+                }
+                
+                .full {
+                    width: 100%;
+                }
+                
+                label {
+                    font-size: 0.8em;
+                    font-weight: lighter;
+                    color: rgba(255, 255, 255, 0.8);
                 }
             </style>
     </template>
