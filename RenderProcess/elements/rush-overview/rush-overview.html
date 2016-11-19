@@ -1,0 +1,209 @@
+<dom-module id="rush-overview">
+    <template>
+        <div id="stuffholder" class="animated fadeIn">
+            <h1>Überprüfen Sie ihre Auswahl</h1>
+            <paper-listbox class="dropdown-content" id="listbox">
+                <template is="dom-repeat" items="[[lightboxes]]">
+                    <div class="wrapper">
+                        <div class="listItem front">
+                            <div class="col">
+                                <p class="desc">{{item.name}}</p>
+
+                            </div>
+                        </div>
+                        <div>
+                </template>
+            </paper-listbox>
+            <div id="settings" class="col">
+                <div class="row">
+                    <div class="col center half">
+                        <h2>{{selectedImages}}</h2>
+                        <label>Bilder ausgewählt</label>
+                    </div>
+                    <div class="col half">
+                        <div class="row">
+                            <p><b>{{subscription.allotment.downloads_left}}</b> Bilder mit der Aktuellsten Subscription verfügbar</p>
+                        </div>
+                        <div class="row">
+                            <label>{{timeout}} läuft die Subscription aus.</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row spaced full">
+                    <paper-input id="inputForValidation" required label="Speicherort Auswählen" value="{{path}}" on-tap="openDialog"></paper-input>
+                    <paper-button raised on-tap="openDialog">Öffnen</paper-button>
+                </div>
+            </div>
+            <div id="footer">
+                <paper-button on-tap="back">Zurück</paper-button>
+                
+                <paper-button on-tap="continue" elevated>Download</paper-button>
+            </div>
+            </div>
+            <paper-toast id="toast" text="Hello world!"></paper-toast>
+            <style>
+                #stuffholder {
+                    margin-top: 10vh;
+                    height: 90vh;
+                    width: 50vw;
+                    min-width: 450px;
+                    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12);
+                    border-radius: 3px;
+                    background: white;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                
+                h1 {
+                    background: #f44336;
+                    margin: 0;
+                    padding: 5px;
+                    text-align: left;
+                    color: white;
+                    border-radius: 3px;
+                    font-weight: lighter;
+                    font-size: 1.9em;
+                    padding-top: 100px;
+                    padding-left: 20px;
+                }
+                
+                paper-listbox {
+                    overflow: auto;
+                    height: 40%;
+                }
+                
+                #settings {
+                    height: 60%;
+                    background: #EF5350;
+                    color: white;
+                    padding: 20px;
+                    font-size: 1.3em;
+                }
+                
+                #settings > div {
+                    margin-top: 25px;
+                }
+                
+                #settings paper-button {
+                    color: white;
+                    font-size: 0.7em;
+                }
+                
+                #settings paper-input {
+                        width: 60%;
+                    --paper-input-container-color: white;
+                    --paper-input-container-focus-color: white;
+                    --paper-input-container-invalid-color: white;
+                    --paper-input-container-input-color: white;
+                }
+                
+                ::-webkit-scrollbar {
+                    width: 6px;
+                }
+                
+                ::-webkit-scrollbar-track {
+                    background-color: #eaeaea;
+                    border-left: 1px solid #ccc;
+                }
+                
+                ::-webkit-scrollbar-thumb {
+                    background-color: #888;
+                    border-radius: 10px;
+                }
+                
+                ::-webkit-scrollbar-thumb:hover {
+                    background-color: #aaa;
+                }
+                
+                .col {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                }
+                
+                .row {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                }
+                
+                .center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .spaced{
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: flex-end;
+                }
+                
+                .desc {
+                    font-size: 1.5em;
+                    margin: 5px 0px;
+                    padding-left: 20px;
+                }
+                
+                .listItem {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 5px;
+                    color: black;
+                    background-position: center;
+                }
+                
+                #footer {
+                    height: 6%;
+                    min-height: 50px;
+                    display: flex;
+                    justify-content: space-around;
+                    background: #F44336;
+                    color: white;
+                }
+                
+                .back {
+                    z-index: 0;
+                    position: absolute;
+                    top: 0;
+                    height: 100%;
+                    width: 100%;
+                    overflow: hidden;
+                    filter: blur(3px);
+                }
+                
+                .front {
+                    z-index: 2;
+                    position: relative;
+                }
+                
+                .wrapper {
+                    position: relative;
+                }
+                
+                img {
+                    height: auto;
+                    width: 100%;
+                }
+                
+                .half {
+                    width: 50%;
+                }
+                
+                .full {
+                    width: 100%;
+                }
+                
+                label {
+                    font-size: 0.8em;
+                    font-weight: lighter;
+                    color: rgba(255, 255, 255, 0.8);
+                }
+            </style>
+    </template>
+    <script src="./rush-overview.js"></script>
+</dom-module>
