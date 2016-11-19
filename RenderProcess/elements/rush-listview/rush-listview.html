@@ -1,6 +1,7 @@
 <dom-module id="rush-listview">
     <template>
         <div id="stuffholder" class="animated fadeIn">
+            <h1>Wählen sie die Lightboxen</h1>
             <paper-listbox class="dropdown-content" id="listbox">
                 <template is="dom-repeat" items="[[lightboxes]]">
                     <div class="wrapper">
@@ -28,16 +29,26 @@
             <paper-toast id="toast" text="Hello world!"></paper-toast>
             <style>
                 #stuffholder {
-                    margin-top: 20vh;
-                    height: 80vh;
+                    margin-top: 10vh;
+                    height: 90vh;
                     width: 50vw;
                     min-width: 450px;
                     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.12);
                     border-radius: 3px;
-                    background: #FAFAFA;
+                    background: white;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                }
+                h1{
+                        background: #f44336;
+                        margin: 0;
+                        padding: 5px;
+                        text-align: center;
+                        color: white;
+                        border-radius: 3px;
+                        font-weight: lighter;
+                        font-size: 1.9em;
                 }
                 
                 paper-listbox {

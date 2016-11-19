@@ -5,6 +5,7 @@
 //Ornder anlegen automatisch und sortiert
 //Funktion hinzufügen für automatischen download aller Ornder
 const {ipcRenderer} = require('electron')
+const { remote } =require('electron');
 const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
 window.addEventListener('load',()=>{
 
@@ -15,6 +16,7 @@ window.addEventListener('load',()=>{
     var pages = document.querySelector('iron-pages');
 
     var listView = document.querySelector("rush-listview");
+    var overView = document.querySelector("rush-overview");
 
     //Fetch the Login Page and Continue when Logged in. 
     document.querySelector("rush-login").addEventListener("authDone",()=>{
@@ -33,8 +35,15 @@ window.addEventListener('load',()=>{
         SelectedItems = evnt.detail;
         console.log("Selection Fertig");
         pages.selectNext();
+        overView.setList(SelectedItems);
+    });
 
-});
+    overView.addEventListener("back",()=>{pages.selectPrevious()})
+    overView.addEventListener("continue",(e)=>{
+        var args = e.detail;
+        pages.selectNext();
+    })
+    
 
 
     var goBtn=document.getElementById("goBtn");
@@ -58,7 +67,7 @@ window.addEventListener('load',()=>{
                     console.log(subscriptionId);
                     var expirationDate=data.data[i].expiration_time;
                     var valid=checkIfValid(expirationDate);
-                    if(valid==true)
+                    if(valid)
                     {
                         validSubscriptionId=subscriptionId;
                     }
@@ -130,15 +139,6 @@ window.addEventListener('load',()=>{
                 });
         });
 
-
-
-        //download test img
-        /*for(var i=0;i<SelectedItems.length;i++)
-        {
-
-        }*/
-
-
         var pages = document.querySelector('iron-pages');
         pages.selectNext();
         move();
@@ -157,12 +157,7 @@ window.addEventListener('load',()=>{
     //Alle Login Buttons
     document.getElementById("backToLoginBtn").addEventListener("click",signOut);
     document.getElementById("differentFolder").addEventListener("click",diffFolder);
-    /*for(var i=0;i<loginBtns.length;i++)
-    {
-        loginBtns[i].addEventListener("click",goBackL(0));
-        console.log(loginBtns[i])
-    }*/
-
+    
 
 
 
