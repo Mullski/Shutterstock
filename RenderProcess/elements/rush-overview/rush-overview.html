@@ -1,29 +1,35 @@
-<dom-module id="rush-listview">
+<dom-module id="rush-overview">
     <template>
         <div id="stuffholder" class="animated fadeIn">
-            <h1>Wählen sie die Lightboxen</h1>
+            <h1>Überprüfen Sie ihre Auswahl</h1>
             <paper-listbox class="dropdown-content" id="listbox">
                 <template is="dom-repeat" items="[[lightboxes]]">
                     <div class="wrapper">
                         <div class="listItem front">
-                            <paper-checkbox on-tap="selectChange"></paper-checkbox>
                             <div class="col">
                                 <label class="desc">{{item.name}}</label>
-                                <label>{{item.total_item_count}} Bilder</label>
+
                             </div>
-                        </div>
-                        <div class="back">
-                            <img src="{{item.cover_item.url}}"></img>
                         </div>
                         <div>
                 </template>
             </paper-listbox>
+            <div id="settings">
+                <div class="">
+                    <p><b>{{selectedImages}}</b> Bilder ausgewählt</p>
+                    <p>{{availableImages}} Bilder mit der Aktuellsten Subscription verfügbar</p>
+                </div>
+                <div class="row">
+                    <label>Speicherort auswählen</label>
+                    <input type="file" webkitdirectory />
+                </div>
+            </div>
             <div id="footer">
-                <paper-button on-tap="logout">Ausloggen</paper-button>
+                <paper-button on-tap="back">Zurück</paper-button>
                 <div id="info">
                     <p id="sum">{{selectedImages}} Bilder ausgewählt</p>
                 </div>
-                <paper-button on-tap="continue">Weiter</paper-button>
+                <paper-button on-tap="continue" elevated>Download</paper-button>
             </div>
             </div>
             <paper-toast id="toast" text="Hello world!"></paper-toast>
@@ -40,20 +46,31 @@
                     flex-direction: column;
                     justify-content: space-between;
                 }
-                h1{
-                        background: #f44336;
-                        margin: 0;
-                        padding: 5px;
-                        text-align: center;
-                        color: white;
-                        border-radius: 3px;
-                        font-weight: lighter;
-                        font-size: 1.9em;
+                
+                h1 {
+                    background: #f44336;
+                    margin: 0;
+                    padding: 5px;
+                    text-align: left;
+                    color: white;
+                    border-radius: 3px;
+                    font-weight: lighter;
+                    font-size: 1.9em;
+                    padding-top: 100px;
+                    padding-left: 20px;
                 }
                 
                 paper-listbox {
                     overflow: auto;
-                    height: 93%;
+                    height: 40%;
+                }
+                
+                #settings {
+                    height: 60%;
+                    background: #EF5350;
+                    color: white;
+                    padding: 20px;
+                    font-size: 1.3em;
                 }
                 
                 ::-webkit-scrollbar {
@@ -66,8 +83,8 @@
                 }
                 
                 ::-webkit-scrollbar-thumb {
-                        background-color: #888;
-                        border-radius: 10px;
+                    background-color: #888;
+                    border-radius: 10px;
                 }
                 
                 ::-webkit-scrollbar-thumb:hover {
@@ -86,21 +103,12 @@
                     margin: 5px 0px;
                 }
                 
-                paper-checkbox {
-                    margin-right: 20px;
-                    margin-left: 10px;
-                    --paper-checkbox-unchecked-color:white;
-                    --paper-checkbox-checked-color:#F44336;
-                    --paper-checkbox-unchecked-ink-color:#F44336
-                    
-                }
-                
                 .listItem {
                     display: flex;
                     justify-content: flex-start;
                     align-items: center;
                     padding: 5px;
-                    color: white;
+                    color: black;
                     background-position: center;
                 }
                 
@@ -124,7 +132,6 @@
                 }
                 
                 .front {
-                    background: rgba(47, 47, 47, 0.22);
                     z-index: 2;
                     position: relative;
                 }
@@ -139,5 +146,5 @@
                 }
             </style>
     </template>
-    <script src="./rush-listview.js"></script>
+    <script src="./rush-overview.js"></script>
 </dom-module>
