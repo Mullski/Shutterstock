@@ -27,7 +27,6 @@ window.addEventListener('load',()=>{
         pages.selectNext();
         listView.load();        
 
-
     });
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
 
@@ -67,6 +66,7 @@ window.addEventListener('load',()=>{
                     console.log(subscriptionId);
                     var expirationDate=data.data[i].expiration_time;
                     var valid=checkIfValid(expirationDate);
+
                     if(valid)
                     {
                         validSubscriptionId=subscriptionId;
@@ -85,8 +85,7 @@ window.addEventListener('load',()=>{
 
         });
 
-
-        var itemId;
+        var itemId="";
         SelectedItems.forEach((lightbox)=>
         {
                 var lightboxIds =lightbox.id;
