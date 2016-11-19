@@ -66,11 +66,8 @@ window.addEventListener('load',()=>{
                     console.log(subscriptionId);
                     var expirationDate=data.data[i].expiration_time;
                     var valid=checkIfValid(expirationDate);
-<<<<<<< HEAD
-                    if(valid==true)
-=======
+
                     if(valid)
->>>>>>> master
                     {
                         validSubscriptionId=subscriptionId;
                     }
@@ -88,72 +85,7 @@ window.addEventListener('load',()=>{
 
         });
 
-<<<<<<< HEAD
-
         var itemId="";
-        SelectedItems.forEach((lightbox)=>
-        {
-                var lightboxIds =lightbox.id;
-                var lightboxName=lightbox.name;
-                ShutterServiceAPI.fetchCollItems(lightboxIds,(err,data)=>{
-                    if(err==null)
-                    {
-                        for(var i=0;i<data.data.length;i++)
-                        {
-                            //jedes Item
-
-                            itemId=data.data[i].id;
-                            console.log("Item ids "+itemId);
-                            ShutterServiceAPI.fetchImageDet(itemId,(err,data)=> {
-                                if (err == null)
-                                {
-                                    var details=data.assets;
-                                    var imgId=data.id;
-                                    console.log("image ids "+imgId);
-                                    //vektor eps checken ob es vektorgrafiken gibt
-                                    var info=applyRules(details);
-
-
-                                    ShutterServiceAPI.getDownloadByID(imgId,info.size,validSubscriptionId,info.format,(err,data)=>{
-                                        if(err==null)
-                                        {
-                                            var dlink=data.data[0].download.url;
-                                            console.log(dlink);
-                                            //downloaden
-                                            ShutterServiceAPI.downloadImg(dlink,lightboxName,(err,data)=>{
-
-                                            });
-
-                                        }
-                                        else{
-                                            console.log("Error DLink");
-                                        }
-                                    });
-
-                                }
-                            });
-
-                        }
-
-                    }
-                    else
-                    {
-
-                    }
-                });
-        });
-
-
-
-        //download test img
-        /*for(var i=0;i<SelectedItems.length;i++)
-        {
-
-        }*/
-=======
->>>>>>> master
-
-        var itemId;
         SelectedItems.forEach((lightbox)=>
         {
                 var lightboxIds =lightbox.id;
