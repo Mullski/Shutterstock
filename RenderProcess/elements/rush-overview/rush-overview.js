@@ -1,5 +1,6 @@
 try {
     const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
+    const { remote } =require('electron');
 } catch (e) {
 
 }
@@ -8,11 +9,8 @@ Polymer({
     is: "rush-overview",
 
     created: function () {
-
     },
-
     attached: function () {
-
     },
     setList: function (boxes) {
         this.set("lightboxes", boxes);
@@ -46,9 +44,31 @@ Polymer({
             }
 
         });
-
-
-
+    },
+    openDialog:function(){
+        //Open a Select Folder Dialog
+        remote.dialog.showOpenDialog(remote.getCurrentWindow(),{properties: ['openDirectory']},
+        (path)=>{
+            if(path){this.set("path",path);}
+        });
+    },
+    back:function(){
+        this.fire("back");
+    },
+    continue:function(){
+        //Fetch all the Stuff we did.
+        var boxes = this.get("lightboxes");
+        var subscription = this.get("subscription");
+        var downloadPath = this.get("path");
+        if(downloadPath.length>0 && subscription != null){
+            this.fire("continue",{boxes:boxes,subscription:subscription,path:downloadPath});
+        }else if(downloadPath.length<=0){
+            this.$.toast.text="Kein Speicherort Angegeben";
+            this.$.toast.open();
+        }else if(subscription === null){
+            this.$.toast.text="Keine valide Subscription für den Download gefunden";
+            this.$.toast.open();
+        }
     }
 
 });
