@@ -1,0 +1,32 @@
+<dom-module id="rush-download">
+    <template>
+        <div id="stuffholder" class="animated fadeIn">
+           <h1>Downloading</h1>
+           <h2>{{status}}%</h2>
+        </div>
+        <style>
+            .col {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            #stuffholder {
+                height: 100vh;
+                width: 100vw;
+                background: #FAFAFA;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            paper-button {
+                background: #F44336
+            }
+        </style>
+    </template>
+    <script src="./rush-download.js"></script>
+</dom-module>
+

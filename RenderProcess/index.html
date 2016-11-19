@@ -21,9 +21,8 @@
     <!--  Our Own Custom Elements-->
     <link rel="import" href="elements/rush-login/rush-login.html">
     <link rel="import" href="elements/rush-listview/rush-listview.html">
-
     <link rel="import" href="elements/rush-overview/rush-overview.html">
-
+    <link rel="import" href="elements/rush-download/rush-download.html">
 
     <link rel="stylesheet"href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -35,29 +34,8 @@
     <rush-login></rush-login>
     <rush-listview></rush-listview>
     <rush-overview></rush-overview>
-    <div id="downlOpt">
-        <div class="background">
-            <h3>Select the Quality and the Download Directory</h3>
-            <ul id="selLightbox"></ul>
-            <hr>
-            <paper-button>...(File Directory)</paper-button>
-            <br>
-            <paper-button id="goBtn" >Go</paper-button>
-            <paper-button id="backBtn">Back</paper-button>
-        </div>
-    </div>
-    <div id="progress">
-        <div class="background">
-            <h4>Download Progress</h4>
-            <div id="myProgress">
-                <div id="container"></div>
-            </div>
-            <div id="placeHolder">
-            <paper-button id="backToLoginBtn">Sign Out</paper-button>
-            <paper-button id="differentFolder">Different Lightbox</paper-button>
-            </div>
-        </div>
-    </div>
+    <rush-download></rush-download>
+    
 </iron-pages>
 </body>
 </html>

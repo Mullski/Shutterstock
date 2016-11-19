@@ -26,16 +26,23 @@ exports.openAuth = (callback) => {
 
     authCallbacks.push(callback);
 };
-exports.downloadImg=(url,lightboxName,callback)=>{
-    var homedir = os.homedir();
-    console.log("Download Img, homedir /n"+homedir);
+exports.downloadImg=(url,lightboxName,path,callback)=>{
+    if(path == undefined){
+        path = os.homedir() +"/downloads"
+
+    }
+    
+    console.log("Download Img, homedir /n"+path);
     var res=url.split("/");
     var name=res[5];
     console.log(name);
-    fs.mkdir(homedir+"/downloads/"+lightboxName,(err,folder)=>{
-        var file = fs.createWriteStream(homedir+"/downloads/"+lightboxName+"/"+name);
+    fs.mkdir(path+"/"+lightboxName,(err,folder)=>{
+        var file = fs.createWriteStream(path+"/"+lightboxName+"/"+name);
         var request = https.get(url, function(response) {
-            response.pipe(file);
+            var stream = response.pipe(file);
+            stream.on("finish",()=>{
+                    callback();
+            });
         });
 
     });
@@ -159,7 +166,7 @@ exports.getDownloadByID = (itemId,size,subId,format,callback) => {
 exports.logout = ()=>{
      win = new BrowserWindow({ width: 350, height: 600 })
      win.loadURL("https://developers.shutterstock.com/logout?next=http://google.com");
-     win.close();
+     
 }
 
 
