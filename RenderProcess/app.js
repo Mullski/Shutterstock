@@ -5,6 +5,7 @@
 //Ornder anlegen automatisch und sortiert
 //Funktion hinzufügen für automatischen download aller Ornder
 const {ipcRenderer} = require('electron')
+const { remote } =require('electron');
 const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
 window.addEventListener('load',()=>{
 
