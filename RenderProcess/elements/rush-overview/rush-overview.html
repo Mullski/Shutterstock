@@ -37,7 +37,7 @@
             </div>
             <div id="footer">
                 <paper-button on-tap="back">Zurück</paper-button>
-                
+
                 <paper-button on-tap="continue" elevated>Download</paper-button>
             </div>
             </div>
@@ -55,9 +55,11 @@
                     flex-direction: column;
                     justify-content: space-between;
                 }
-                #subAllow{
+                
+                #subAllow {
                     font-size: 75%;
                 }
+                
                 h1 {
                     background: #f44336;
                     margin: 0;
@@ -74,6 +76,7 @@
                 paper-listbox {
                     overflow: auto;
                     height: 40%;
+                    min-height: 65px;
                 }
                 
                 #settings {
@@ -82,6 +85,8 @@
                     color: white;
                     padding: 20px;
                     font-size: 1.3em;
+                    overflow: auto;
+                    min-height: 200px;
                 }
                 
                 #settings > div {
@@ -94,7 +99,7 @@
                 }
                 
                 #settings paper-input {
-                        width: 60%;
+                    width: 60%;
                     --paper-input-container-color: white;
                     --paper-input-container-focus-color: white;
                     --paper-input-container-invalid-color: white;
@@ -138,10 +143,11 @@
                     justify-content: center;
                     align-items: center;
                 }
-                .spaced{
-                        display: flex;
-                        justify-content: space-around;
-                        align-items: flex-end;
+                
+                .spaced {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: flex-end;
                 }
                 
                 .desc {
