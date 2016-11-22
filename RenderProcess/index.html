@@ -19,10 +19,16 @@
     <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html"> 
     <link rel="import" href="bower_components/paper-toast/paper-toast.html">
     <!--  Our Own Custom Elements-->
+    <link rel="import" href="elements/rush-loading/loadingElement.html">
     <link rel="import" href="elements/rush-login/rush-login.html">
     <link rel="import" href="elements/rush-listview/rush-listview.html">
     <link rel="import" href="elements/rush-overview/rush-overview.html">
+
+    <link rel="import" href="elements/rush-header/rush-header.html">
+
+
     <link rel="import" href="elements/rush-download/rush-download.html">
+
 
     <link rel="stylesheet"href="css/style.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -30,6 +36,7 @@
     <script type="text/javascript" src="app.js" ></script>
 </head>
 <body>
+<rush-header></rush-header>
 <iron-pages id="ironPages" selected="0">
     <rush-login></rush-login>
     <rush-listview></rush-listview>

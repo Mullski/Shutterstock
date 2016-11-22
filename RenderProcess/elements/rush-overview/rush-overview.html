@@ -22,7 +22,7 @@
                     </div>
                     <div class="col half">
                         <div class="row">
-                            <p><b>{{subscription.allotment.downloads_left}}</b> Bilder mit der Aktuellsten Subscription verfügbar</p>
+                            <p id="subAllow"><b>{{subscription.allotment.downloads_left}}</b> Bilder mit der Aktuellsten Subscription verfügbar</p>
                         </div>
                         <div class="row">
                             <label>{{timeout}} läuft die Subscription aus.</label>
@@ -55,7 +55,9 @@
                     flex-direction: column;
                     justify-content: space-between;
                 }
-                
+                #subAllow{
+                    font-size: 75%;
+                }
                 h1 {
                     background: #f44336;
                     margin: 0;

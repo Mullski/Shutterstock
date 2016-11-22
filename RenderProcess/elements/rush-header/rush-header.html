@@ -1,0 +1,27 @@
+<dom-module id="rush-header">
+    <template>
+        <div id="headerBar">
+            <paper-button class="optionBtn" on-tap="closeWind">X</paper-button>
+            <paper-button class="optionBtn" on-tap="fullWind">ø</paper-button>
+            <paper-button class="optionBtn" on-tap="minimize">-</paper-button>
+        </div>
+        <style>
+            #headerBar
+            {
+                background: rgba(0, 0, 0, 0.66);
+                width:100vw;
+                height:6vh;
+            }
+            .optionBtn{
+                background: #F44336;
+                color: white;
+                height:6vh;
+                float: right;
+                margin: 0;
+            }
+
+        </style>
+    </template>
+    <script src="./rush-header.js"></script>
+</dom-module>
+

@@ -58,6 +58,9 @@ Polymer({
                 });
                 //Set this as Model
                 this.set("lightboxes", lightboxes);
+                var spinner= this.$.spinner;
+                spinner.hide();
+                console.log("i am done loading");
             }
         });
     },
