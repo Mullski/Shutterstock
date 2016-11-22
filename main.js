@@ -12,7 +12,7 @@ let win;
 
 function createWindow(){
 
-    win = new BrowserWindow({width:800,height:600})
+    win = new BrowserWindow({width:800,height:600,frame:false})
 
     win.loadURL(`file://${__dirname}/RenderProcess/index.html`);
     //    win.loadURL("http://localhost:8080");

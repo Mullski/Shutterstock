@@ -1,13 +1,15 @@
 <dom-module id="rush-login">
     <template>
-        <div id="stuffholder" class="animated fadeIn">
-            <div class="col">
-                <h1>{{title}}</h1>
-                <p>{{description}}</p>
+
+            <div id="stuffholder" class="animated fadeIn">
+                <div class="col">
+                    <h1>{{title}}</h1>
+                    <p>{{description}}</p>
+                </div>
+                <paper-button raised on-tap="auth">Login with Shutterstock</paper-button>
             </div>
-            <paper-button raised on-tap="auth">Login with Shutterstock</paper-button>
-        </div>
-        <paper-toast id="toast" text="Hello world!" ></paper-toast>
+
+        <paper-toast id="toast" text=""></paper-toast>
         <style>
             .col {
                 display: flex;
@@ -29,7 +31,8 @@
             }
             
             paper-button {
-                background: #F44336
+                background: #F44336;
+                color:white;
             }
         </style>
     </template>

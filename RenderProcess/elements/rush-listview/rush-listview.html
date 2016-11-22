@@ -2,6 +2,7 @@
     <template>
         <div id="stuffholder" class="animated fadeIn">
             <h1>Wählen sie die Lightboxen</h1>
+            <rush-loading id="spinner"></rush-loading>
             <paper-listbox class="dropdown-content" id="listbox">
                 <template is="dom-repeat" items="[[lightboxes]]">
                     <div class="wrapper">
@@ -39,6 +40,7 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+
                 }
                 h1{
                         background: #f44336;
@@ -54,6 +56,7 @@
                 paper-listbox {
                     overflow: auto;
                     height: 93%;
+
                 }
                 
                 ::-webkit-scrollbar {

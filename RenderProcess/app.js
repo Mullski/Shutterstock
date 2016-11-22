@@ -42,7 +42,7 @@ window.addEventListener('load',()=>{
     overView.addEventListener("continue",(e)=>{
         var args = e.detail;
         pages.selectNext();
-    })
+    });
     
 
 
