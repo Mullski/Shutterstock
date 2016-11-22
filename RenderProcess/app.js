@@ -17,7 +17,7 @@ window.addEventListener('load',()=>{
 
     var listView = document.querySelector("rush-listview");
     var overView = document.querySelector("rush-overview");
-
+    var downloadView = document.querySelector("rush-download");
     //Fetch the Login Page and Continue when Logged in. 
     document.querySelector("rush-login").addEventListener("authDone",()=>{
         console.log("Auth is Done, welcome");
@@ -26,7 +26,6 @@ window.addEventListener('load',()=>{
 
         pages.selectNext();
         listView.load();        
-
 
     });
     listView.addEventListener("logoutRequested",()=>{pages.selectPrevious()})
@@ -41,7 +40,9 @@ window.addEventListener('load',()=>{
     overView.addEventListener("back",()=>{pages.selectPrevious()})
     overView.addEventListener("continue",(e)=>{
         var args = e.detail;
+        downloadView.load(args);
         pages.selectNext();
+<<<<<<< HEAD
     });
     
 
@@ -160,111 +161,10 @@ window.addEventListener('load',()=>{
     
 
 
+=======
+    })
+>>>>>>> master
 
 });
-
-function signOut(){
-    var ironPages=document.getElementById("ironPages");
-    ironPages.selectIndex(0);
-
-}
-function diffFolder()
-{
-    var ironPages=document.getElementById("ironPages");
-    ironPages.selectIndex(1);
-
-}
-function move(){
-    var progress=document.getElementById("container");
-
-
-
-        var width = 1;
-    //TODO: Keine animationen mit set Interval Lösen
-    // You now requestAnimationFrame()?
-        var id = setInterval(frame, 100);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                width=1;
-            } else {
-                width++;
-                progress.style.width = width + '%';
-                progress.innerText= width+"%";
-            }
-        }
-
-
-}
-function findLightboxCount(name,LightBoxMap,callback){
-
-    LightBoxMap.forEach((value,key,map)=>{
-        if(value==name)
-        {
-           callback(key.total_item_count);
-        }
-        })
-    }
-function checkIfValid(expirationDate)
-{
-    var localDate=new Date();
-    var timeStempLocal=Math.round(new Date(localDate).getTime()/1000);
-    var timeStemp=Math.round(new Date(expirationDate).getTime()/1000);
-    var valid=false;
-    if(timeStempLocal<timeStemp)
-    {
-        return valid=true;
-    }
-    else
-    {
-        return valid=false;
-    }
-
-}
-function applyRules(details)
-{
-    console.log(details);
-    console.log(Object.keys(details));
-    var keys = Object.keys(details);
-    var size="";
-    var format="";
-    if(keys.some((e)=>{return e === "vector_eps"}))
-    {
-        size="vector";
-        format="eps";
-    }
-    /*else if(keys.some((e)=>{return e === "supersize_jpg"}))
-    {
-        size="supersize";
-        format="jpg";
-    }*/
-    else if(keys.some((e)=>{return e === "huge_jpg"}))
-    {
-        size="huge";
-        format="jpg";
-    }
-    else if(keys.some((e)=>{return e === "medium_jpg"}))
-    {
-        size="medium";
-        format="jpg";
-    }
-    else if(keys.some((e)=>{return e === "small_jpg"}))
-    {
-        size="small";
-        format="jpg";
-    }
-    else
-    {
-        console.log("error size");
-    }
-
-
-        return {size:size,format:format};
-
-
-
-}
-
-
 
 
