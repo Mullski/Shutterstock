@@ -1,8 +1,17 @@
 <dom-module id="rush-download">
     <template>
         <div id="stuffholder" class="animated fadeIn">
-           <h1>Downloading</h1>
-           <h2>{{status}}%</h2>
+           <iron-pages id="page" selected="0">
+               <div id="downloading">
+                    <h1>Downloading</h1>
+                    <h2>{{status}}%</h2>
+               </div>
+               <div id="postDownload">
+                    <h1>Download fertig </h1>
+                    <paper-button on-tap="openFolder">Ordner Öffnen</paper-button>
+                    <paper-button on-tap="backToStart">Start</paper-button>
+               </div>
+           </iron-pages>
         </div>
         <style>
             .col {

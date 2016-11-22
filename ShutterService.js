@@ -22,8 +22,6 @@ exports.openAuth = (callback) => {
     win = new BrowserWindow({ width: 350, height: 600 })
     win.loadURL("https://accounts.shutterstock.com/oauth/authorize?client_id=ac19a12dc1d0053ab476&scope=user.email collections.view purchases.view licenses.create&redirect_uri=http://127.0.0.1:8080/auth&type=web_server&state=afnqfyw0mh4jhdnzxx1r8p8pvi&response_type=code&display=popup");
     win.show();
-
-
     authCallbacks.push(callback);
 };
 exports.downloadImg=(url,lightboxName,path,callback)=>{
