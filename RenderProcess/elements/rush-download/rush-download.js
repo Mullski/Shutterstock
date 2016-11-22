@@ -1,6 +1,7 @@
 
 try {
     const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
+
 } catch (e) {
 
 }
@@ -19,9 +20,20 @@ Polymer({
     attached: function () {
 
     },
+
+    openFolder:function(){
+        var arg = this.get("argument");
+        if(arg.path[0]!=null){
+            shell.showItemInFolder(arg.path[0]);
+        }
+    },
+    backToStart:function(){
+        this.fire("back");
+    },
     load: function (argument) {
        // this.args = { boxes: boxes, subscription: subscription, path: downloadPath };
         this.set("status", 0);
+        this.set("argument",argument);
 
         var totalamount = 0;
         var doneamount=0;
@@ -90,7 +102,7 @@ Polymer({
             }
         }
         fetchAllLightBoxes(0,()=>{
-            console.log("All Lightboxes Fetched");
+            this.$.page.selectNext();
         }); // Fetch all Lightboxes, start with 0 
             
     }
