@@ -18,7 +18,7 @@ Polymer({
 
     attached: function () {
         this.title = "Rush";
-        this.description = "Hello world";
+        this.description = "Welcome to Rush: Login and choose the lightboxes you want to download";
     },
 
     auth: function () {

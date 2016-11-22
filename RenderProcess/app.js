@@ -4,7 +4,7 @@
 //maximale Qualität(kostenfrei) falls Vektorgrafik dann Vektor
 //Ornder anlegen automatisch und sortiert
 //Funktion hinzufügen für automatischen download aller Ornder
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
 const { remote } =require('electron');
 const {shell} = require('electron')
 const ShutterServiceAPI = require('electron').remote.require('./ShutterService.js');
@@ -39,11 +39,11 @@ window.addEventListener('load',()=>{
     });
 
     overView.addEventListener("back",()=>{pages.selectPrevious()})
-    overView.addEventListener("continue",(e)=>{
+    overView.addEventListener("continue",(e)=> {
         var args = e.detail;
         downloadView.load(args);
         pages.selectNext();
-    })
+    });
 
     downloadView.addEventListener("back",()=>{
         pages.select(pages.indexOf(listView));
