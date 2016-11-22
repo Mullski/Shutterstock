@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ec18d17-1803-44be-894f-0da014ef6b48" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-loading/loadingElement.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-loading/loadingElement.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/app.js" afterPath="$PROJECT_DIR$/RenderProcess/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/elements/rush-listview/rush-listview.html" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-listview/rush-listview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/elements/rush-listview/rush-listview.js" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-listview/rush-listview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.html" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.js" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/elements/rush-overview/rush-overview.html" afterPath="$PROJECT_DIR$/RenderProcess/elements/rush-overview/rush-overview.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RenderProcess/index.html" afterPath="$PROJECT_DIR$/RenderProcess/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.js" afterPath="$PROJECT_DIR$/main.js" />
     </list>
     <ignored path="Shutterstock.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,7 +28,17 @@
         <entry file="file://$PROJECT_DIR$/RenderProcess/app.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+              <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/RenderProcess/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.48312885">
+              <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -65,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rush-header.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rush-header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4601227">
+            <state vertical-scroll-proportion="-12.5">
               <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding />
             </state>
@@ -131,11 +130,11 @@
         <option value="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.js" />
         <option value="$PROJECT_DIR$/main.js" />
         <option value="$PROJECT_DIR$/RenderProcess/elements/rush-login/rush-login.html" />
-        <option value="$PROJECT_DIR$/RenderProcess/index.html" />
         <option value="$PROJECT_DIR$/RenderProcess/elements/rush-overview/rush-overview.html" />
-        <option value="$PROJECT_DIR$/RenderProcess/app.js" />
         <option value="$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.js" />
         <option value="$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.html" />
+        <option value="$PROJECT_DIR$/RenderProcess/app.js" />
+        <option value="$PROJECT_DIR$/RenderProcess/index.html" />
       </list>
     </option>
   </component>
@@ -547,6 +546,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -561,6 +561,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="59" selection-start-line="25" selection-start-column="59" selection-end-line="25" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -583,6 +584,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -605,6 +607,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -620,6 +623,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="10" selection-start-line="60" selection-start-column="10" selection-end-line="60" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -663,6 +667,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -692,6 +697,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -721,6 +727,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="98" selection-start-line="10" selection-start-column="98" selection-end-line="10" selection-end-column="98" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,6 +757,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -779,6 +787,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -842,6 +851,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -849,13 +859,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RenderProcess/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.416667">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -891,14 +894,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RenderProcess/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -909,8 +904,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RenderProcess/elements/rush-header/rush-header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4601227">
+        <state vertical-scroll-proportion="-12.5">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenderProcess/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RenderProcess/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48312885">
+          <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
           <folding />
         </state>
       </provider>
